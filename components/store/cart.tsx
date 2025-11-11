@@ -8,9 +8,10 @@ interface CartProps {
   items: any[]
   onRemove: (id: string) => void
   onClose: () => void
+  onUpdateQuantity: (id: string, quantity: number) => void
 }
 
-export function Cart({ items, onRemove, onClose }: CartProps) {
+export function Cart({ items, onRemove, onClose, onUpdateQuantity }: CartProps) {
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
   return (
@@ -48,11 +49,17 @@ export function Cart({ items, onRemove, onClose }: CartProps) {
                   </button>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="p-1 hover:bg-secondary rounded">
+                  <button
+                    onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                    className="p-1 hover:bg-secondary rounded"
+                  >
                     <Minus className="w-4 h-4" />
                   </button>
                   <span className="text-sm font-semibold flex-1">{item.quantity}</span>
-                  <button className="p-1 hover:bg-secondary rounded">
+                  <button
+                    onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                    className="p-1 hover:bg-secondary rounded"
+                  >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>

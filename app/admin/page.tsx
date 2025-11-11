@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import AdminSidebar from "@/components/admin/admin-sidebar"
 import ProductManager from "@/components/admin/product-manager"
 import StoreSettings from "@/components/admin/store-settings"
@@ -38,6 +38,25 @@ export default function AdminPage() {
     instagram: "@aniluxstore",
     twitter: "@aniluxstore",
   })
+
+  useEffect(() => {
+    const savedProducts = localStorage.getItem("anilux-products")
+    if (savedProducts) {
+      setProducts(JSON.parse(savedProducts))
+    }
+    const savedStoreInfo = localStorage.getItem("anilux-store-info")
+    if (savedStoreInfo) {
+      setStoreInfo(JSON.parse(savedStoreInfo))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("anilux-products", JSON.stringify(products))
+  }, [products])
+
+  useEffect(() => {
+    localStorage.setItem("anilux-store-info", JSON.stringify(storeInfo))
+  }, [storeInfo])
 
   const handleAddProduct = (newProduct: any) => {
     setProducts([...products, { ...newProduct, id: Date.now() }])

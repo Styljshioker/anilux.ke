@@ -5,86 +5,12 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Heart } from "lucide-react"
 
-const PRODUCTS = [
-  {
-    id: "1",
-    name: "Celestial Hoodie",
-    category: "Hoodies",
-    price: 89.99,
-    image: "/anime-galaxy-hoodie-cosmic.jpg",
-    rating: 4.9,
-    reviews: 128,
-  },
-  {
-    id: "2",
-    name: "Stellar T-Shirt",
-    category: "T-Shirts",
-    price: 39.99,
-    image: "/anime-character-tshirt-design.jpg",
-    rating: 4.8,
-    reviews: 96,
-  },
-  {
-    id: "3",
-    name: "Nebula Jacket",
-    category: "Jackets",
-    price: 149.99,
-    image: "/luxury-anime-jacket-premium.jpg",
-    rating: 5.0,
-    reviews: 54,
-  },
-  {
-    id: "4",
-    name: "Aurora Cargo Pants",
-    category: "Pants",
-    price: 79.99,
-    image: "/anime-cargo-pants-streetwear.jpg",
-    rating: 4.7,
-    reviews: 82,
-  },
-  {
-    id: "5",
-    name: "Galaxy Cap",
-    category: "Accessories",
-    price: 34.99,
-    image: "/anime-baseball-cap-cosmic.jpg",
-    rating: 4.9,
-    reviews: 112,
-  },
-  {
-    id: "6",
-    name: "Cosmic Sweater",
-    category: "Sweaters",
-    price: 69.99,
-    image: "/anime-sweater-luxury-knit.jpg",
-    rating: 4.8,
-    reviews: 76,
-  },
-  {
-    id: "7",
-    name: "Astral Socks Set",
-    category: "Accessories",
-    price: 24.99,
-    image: "/anime-socks-colorful-patterns.jpg",
-    rating: 4.6,
-    reviews: 156,
-  },
-  {
-    id: "8",
-    name: "Void Sneakers",
-    category: "Footwear",
-    price: 119.99,
-    image: "/luxury-anime-sneakers-black.jpg",
-    rating: 5.0,
-    reviews: 67,
-  },
-]
-
 interface ProductShowcaseProps {
+  products: any[]
   onAddToCart: (product: any) => void
 }
 
-export function ProductShowcase({ onAddToCart }: ProductShowcaseProps) {
+export function ProductShowcase({ products, onAddToCart }: ProductShowcaseProps) {
   const [favorites, setFavorites] = useState<string[]>([])
 
   const toggleFavorite = (id: string) => {
@@ -105,7 +31,7 @@ export function ProductShowcase({ onAddToCart }: ProductShowcaseProps) {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PRODUCTS.map((product) => (
+          {products.map((product) => (
             <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
               {/* Image Container */}
               <div className="relative overflow-hidden bg-secondary h-64">
